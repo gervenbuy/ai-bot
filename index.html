@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <!-- STREAMING_CHUNK:Configuring document metadata and loading dependencies -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全渠道機器人自動收單進階班 | 打造24小時收單印鈔機</title>
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 Google 字體 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- 載入 Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            500: '#f59e0b', // 警告/促銷色
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- STREAMING_CHUNK:Building the Navigation Bar -->
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-slate-900/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center font-bold text-xl tracking-wider">
+                    <i class="fa-solid fa-robot text-brand-500 mr-2"></i>
+                    Auto<span class="text-brand-500">Sales</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#pain-points" class="text-slate-300 hover:text-white transition">課程痛點</a>
+                    <a href="#syllabus" class="text-slate-300 hover:text-white transition">學習大綱</a>
+                    <a href="#target" class="text-slate-300 hover:text-white transition">適合對象</a>
+                </div>
+                <div>
+                    <a href="#pricing" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-2 rounded-full font-medium transition shadow-lg shadow-brand-500/30">
+                        立即搶佔名額
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- STREAMING_CHUNK:Creating the Hero Section with urgent offer -->
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- 背景裝飾 -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-50 animate-pulse"></div>
+        <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-50 animate-pulse" style="animation-delay: 2s;"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-block mb-4 px-4 py-1.5 rounded-full border border-accent-500/30 bg-accent-500/10 text-accent-500 font-semibold text-sm tracking-wide">
+                <i class="fa-solid fa-fire mr-1"></i> 告別手動回覆，流量變現終極指南
+            </div>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+                打造你的 24 小時 <br class="hidden md:block" />
+                <span class="gradient-text">全自動收單印鈔機</span>
+            </h1>
+            <p class="mt-4 text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed">
+                從零搭建機器人、無縫綁定 IG/FB/LINE@，<br class="hidden sm:block">
+                結合賣場推播精美商品卡，讓 AI 幫你聊出高轉換轉單！
+            </p>
+            
+            <!-- 課程資訊小卡 -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10">
+                <div class="glass-card px-6 py-3 rounded-lg flex items-center">
+                    <i class="fa-regular fa-calendar text-brand-500 text-xl mr-3"></i>
+                    <div class="text-left">
+                        <p class="text-xs text-slate-400">課程時間</p>
+                        <p class="font-semibold">6/26 (五) 13:00</p>
+                    </div>
+                </div>
+                <div class="glass-card px-6 py-3 rounded-lg flex items-center">
+                    <i class="fa-solid fa-location-dot text-brand-500 text-xl mr-3"></i>
+                    <div class="text-left">
+                        <p class="text-xs text-slate-400">上課地點</p>
+                        <p class="font-semibold">辰巳咖啡</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#pricing" class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-full text-white bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 transform hover:scale-105 transition-all shadow-xl shadow-brand-500/25">
+                查看今日限定優惠 <i class="fa-solid fa-arrow-right ml-2"></i>
+            </a>
+            <p class="mt-4 text-sm text-accent-500 font-medium">⚠️ 僅限今日：預付訂金 $1,000 再折 $100</p>
+        </div>
+    </header>
+
+    <!-- STREAMING_CHUNK:Designing the Pain Points section -->
+    <section id="pain-points" class="py-20 bg-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">你是不是也面臨這些<span class="text-red-400">困境</span>？</h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">在這個流量越來越貴的時代，「回覆速度」就是你的「成交勝率」！</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-red-500/50 transition">
+                    <div class="w-14 h-14 bg-red-500/20 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-keyboard text-2xl text-red-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">手動回覆到心累</h3>
+                    <p class="text-slate-400 leading-relaxed">「請 PM」、「價格多少」、「還有貨嗎？」每天面對海量重複訊息，浪費大量時間成本，校長兼撞鐘快要撐不下去。</p>
+                </div>
+                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-red-500/50 transition">
+                    <div class="w-14 h-14 bg-red-500/20 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-user-clock text-2xl text-red-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">回覆太慢流失訂單</h3>
+                    <p class="text-slate-400 leading-relaxed">稍晚一步回覆，客人買意全消就跑去別家買了。下班睡覺時間無法服務，眼睜睜看著潛在營收從指縫中溜走。</p>
+                </div>
+                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-red-500/50 transition">
+                    <div class="w-14 h-14 bg-red-500/20 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-link-slash text-2xl text-red-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-white">空有賣場卻推不動</h3>
+                    <p class="text-slate-400 leading-relaxed">已經辛苦搭建好了電商賣場，卻還在用人工一筆一筆貼網址推銷，無法視覺化刺激購買慾，轉化率低迷不振。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STREAMING_CHUNK:Structuring the 4-Step Syllabus Section -->
+    <section id="syllabus" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">全渠道機器人自動收單<span class="text-brand-400">進階班</span></h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">這不是一堂只教你怎麼設定的基礎課，而是帶你完成一套真正能「落地變現」的 AI 數位流程建置。</p>
+            </div>
+
+            <div class="relative">
+                <!-- 連接線 (Desktop) -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-brand-900 via-brand-500 to-purple-900 transform -translate-y-1/2 z-0"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+                    <!-- Step 1 -->
+                    <div class="glass-card p-6 rounded-2xl relative mt-8 md:mt-0">
+                        <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-slate-900 border-2 border-brand-500 rounded-full flex items-center justify-center text-xl font-bold text-brand-400">1</div>
+                        <div class="text-center mt-6">
+                            <i class="fa-solid fa-user-plus text-4xl text-slate-300 mb-4 block"></i>
+                            <h3 class="text-lg font-bold mb-2 text-white">註冊與地基搭建</h3>
+                            <p class="text-sm text-slate-400">不用寫程式！帶你無痛完成系統註冊，建立專屬的自動化後台，把複雜的設定變成簡單 SOP。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="glass-card p-6 rounded-2xl relative mt-8 md:mt-0">
+                        <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-slate-900 border-2 border-brand-500 rounded-full flex items-center justify-center text-xl font-bold text-brand-400">2</div>
+                        <div class="text-center mt-6">
+                            <i class="fa-brands fa-hubspot text-4xl text-brand-400 mb-4 block"></i>
+                            <h3 class="text-lg font-bold mb-2 text-white">全網流量打通綁定</h3>
+                            <p class="text-sm text-slate-400">不管客人從哪裡來通通接得住！將 IG、FB、LINE@ 三大社群一鍵串接，打造全方位私域流量池。</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="glass-card p-6 rounded-2xl relative mt-8 md:mt-0">
+                        <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-slate-900 border-2 border-brand-500 rounded-full flex items-center justify-center text-xl font-bold text-brand-400">3</div>
+                        <div class="text-center mt-6">
+                            <i class="fa-solid fa-images text-4xl text-purple-400 mb-4 block"></i>
+                            <h3 class="text-lg font-bold mb-2 text-white">精準推播商品卡</h3>
+                            <p class="text-sm text-slate-400">串接現有賣場，當客人觸發關鍵字，系統立刻送上精美的「圖文商品卡」，視覺化刺激購買慾。</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="glass-card p-6 rounded-2xl relative mt-8 md:mt-0">
+                        <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-slate-900 border-2 border-brand-500 rounded-full flex items-center justify-center text-xl font-bold text-brand-400">4</div>
+                        <div class="text-center mt-6">
+                            <i class="fa-solid fa-cart-shopping text-4xl text-accent-500 mb-4 block"></i>
+                            <h3 class="text-lg font-bold mb-2 text-white">自動引導轉單結帳</h3>
+                            <p class="text-sm text-slate-400">24 小時無休超級客服！根據提問自動回應解惑，直接引導至購物車結帳，實現睡覺也在賺錢。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STREAMING_CHUNK:Target Audience Section -->
+    <section id="target" class="py-20 bg-slate-800/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Data and automation" class="rounded-2xl shadow-2xl shadow-brand-900/50 object-cover h-[400px] w-full">
+                </div>
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">這堂課專為<span class="text-brand-400">想放大業績的你</span>設計</h2>
+                    <p class="text-slate-300 text-lg mb-8 leading-relaxed">
+                        停止無效的瞎忙，讓自動化流程為你的業績打工！把你的社群帳號變成最強的自動化銷售業務員。
+                    </p>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-400 text-xl mr-4 mt-1"></i>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">品牌電商賣家</h4>
+                                <p class="text-slate-400">訊息總是回不完，想降低客服人力成本，提升服務品質。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-400 text-xl mr-4 mt-1"></i>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">一人創業老闆</h4>
+                                <p class="text-slate-400">校長兼撞鐘，需要一套自動化系統幫你分擔繁瑣的銷售與導流工作。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-400 text-xl mr-4 mt-1"></i>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">社群行銷操盤手</h4>
+                                <p class="text-slate-400">想利用粉專與 IG 的自動化互動機制，大幅提升貼文觸及與轉單率。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STREAMING_CHUNK:Pricing and Urgency Call to Action -->
+    <section id="pricing" class="py-24 relative overflow-hidden">
+        <!-- 背景裝飾 -->
+        <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-brand-900/40 to-transparent"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="glass-card rounded-3xl p-8 md:p-12 border-2 border-brand-500/50 shadow-2xl shadow-brand-500/20 text-center">
+                <div class="inline-block bg-accent-500 text-slate-900 font-bold px-4 py-1 rounded-full text-sm mb-6 animate-bounce">
+                    <i class="fa-solid fa-bolt mr-1"></i> 限時優惠活動
+                </div>
+                
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">進階班專屬方案</h2>
+                <p class="text-slate-300 text-lg mb-8">投資一個幫你 24 小時賺錢的業務員，只要吃一頓大餐的價格。</p>
+                
+                <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-10">
+                    <div class="text-center line-through text-slate-500">
+                        <span class="block text-sm">原價</span>
+                        <span class="text-2xl font-semibold">NT$ 3,600</span>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-slate-600 hidden md:block"></i>
+                    <div class="text-center">
+                        <span class="block text-brand-400 font-medium mb-1">進階班特惠價</span>
+                        <div class="flex items-baseline justify-center text-5xl font-extrabold text-white">
+                            <span class="text-2xl mr-1">NT$</span>1,980
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 限定今日優惠區塊 -->
+                <div class="bg-slate-800/80 border border-accent-500/50 rounded-xl p-6 mb-10 text-left max-w-xl mx-auto">
+                    <h4 class="text-accent-500 font-bold text-xl mb-2"><i class="fa-solid fa-gift mr-2"></i>僅限今日！專屬早鳥行動禮</h4>
+                    <p class="text-slate-300 mb-4">現在立即預付訂金 <strong class="text-white">NT$ 1,000</strong> 搶佔名額，尾款總價直接 <strong class="text-green-400">再折抵 NT$ 100</strong>！</p>
+                    <div class="flex justify-between items-center border-t border-slate-600 pt-4 mt-2">
+                        <span class="text-slate-400">今日結帳總成本僅需：</span>
+                        <span class="text-2xl font-bold text-white">NT$ 1,880</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="bg-gradient-to-r from-accent-500 to-orange-500 hover:from-accent-400 hover:to-orange-400 text-white text-lg font-bold py-4 px-10 rounded-full shadow-lg shadow-accent-500/30 transform hover:scale-105 transition-all">
+                        立即付訂 $1000 享折扣
+                    </button>
+                    <button class="bg-slate-700 hover:bg-slate-600 text-white text-lg font-bold py-4 px-10 rounded-full transition-all">
+                        聯絡客服詢問
+                    </button>
+                </div>
+                <p class="mt-6 text-sm text-slate-500">名額有限，滿班即關閉報名表單。確保教學品質，採小班制教學。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STREAMING_CHUNK:Final Footer section -->
+    <footer class="bg-slate-950 py-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center mb-4 md:mb-0">
+                <i class="fa-solid fa-robot text-brand-500 text-2xl mr-2"></i>
+                <span class="text-xl font-bold text-white">Auto<span class="text-brand-500">Sales</span> 機器人學院</span>
+            </div>
+            
+            <div class="text-slate-500 text-sm text-center md:text-right">
+                <p>上課地點：辰巳咖啡 (提供飲品)</p>
+                <p class="mt-2">&copy; 2024 自動收單進階班. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+```eof
