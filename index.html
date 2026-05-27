@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <!-- STREAMING_CHUNK:Configuring document metadata and loading dependencies -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>全渠道機器人自動收單進階班 | 打造24小時收單印鈔機</title>
-    <!-- 載入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 載入 Google 字體 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <!-- 載入 Font Awesome 圖示 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
@@ -28,7 +24,7 @@
                             900: '#1e3a8a',
                         },
                         accent: {
-                            500: '#f59e0b', // 警告/促銷色
+                            500: '#f59e0b',
                         }
                     }
                 }
@@ -50,11 +46,85 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        /* ── 表單樣式 ── */
+        .form-input {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 0.75rem;
+            padding: 0.85rem 1.1rem;
+            color: #f1f5f9;
+            font-size: 0.95rem;
+            transition: border-color .2s, box-shadow .2s;
+            outline: none;
+        }
+        .form-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,.2);
+        }
+        .form-input::placeholder { color: #475569; }
+        select.form-input option { background: #1e293b; }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 0.4rem;
+        }
+        .required-star { color: #f87171; margin-left: 2px; }
+
+        /* ── 送出按鈕 ── */
+        #submitBtn {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            border: none;
+            border-radius: 9999px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 1rem 2.5rem;
+            cursor: pointer;
+            transition: transform .2s, box-shadow .2s;
+            width: 100%;
+        }
+        #submitBtn:hover:not(:disabled) { transform: scale(1.02); box-shadow: 0 8px 30px rgba(59,130,246,.35); }
+        #submitBtn:disabled { opacity: .65; cursor: not-allowed; }
+
+        /* ── 成功訊息 ── */
+        #successMsg {
+            display: none;
+            text-align: center;
+            padding: 2.5rem 1rem;
+        }
+        #successMsg .check-circle {
+            width: 72px; height: 72px;
+            background: linear-gradient(135deg,#22c55e,#16a34a);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.25rem;
+            font-size: 2rem;
+            box-shadow: 0 0 0 12px rgba(34,197,94,.15);
+        }
+
+        /* 錯誤提示 */
+        .field-error {
+            font-size: 0.78rem;
+            color: #f87171;
+            margin-top: 0.3rem;
+            display: none;
+        }
+        .has-error .form-input {
+            border-color: #f87171 !important;
+        }
+        .has-error .field-error { display: block; }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 antialiased selection:bg-brand-500 selection:text-white">
 
-    <!-- STREAMING_CHUNK:Building the Navigation Bar -->
+    <!-- ════ NAV ════ -->
     <nav class="fixed w-full z-50 transition-all duration-300 bg-slate-900/90 backdrop-blur-md border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -66,9 +136,10 @@
                     <a href="#pain-points" class="text-slate-300 hover:text-white transition">課程痛點</a>
                     <a href="#syllabus" class="text-slate-300 hover:text-white transition">學習大綱</a>
                     <a href="#target" class="text-slate-300 hover:text-white transition">適合對象</a>
+                    <a href="#register" class="text-slate-300 hover:text-white transition">立即報名</a>
                 </div>
                 <div>
-                    <a href="#pricing" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-2 rounded-full font-medium transition shadow-lg shadow-brand-500/30">
+                    <a href="#register" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-2 rounded-full font-medium transition shadow-lg shadow-brand-500/30">
                         立即搶佔名額
                     </a>
                 </div>
@@ -76,9 +147,8 @@
         </div>
     </nav>
 
-    <!-- STREAMING_CHUNK:Creating the Hero Section with urgent offer -->
+    <!-- ════ HERO ════ -->
     <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <!-- 背景裝飾 -->
         <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-50 animate-pulse"></div>
         <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-50 animate-pulse" style="animation-delay: 2s;"></div>
 
@@ -95,7 +165,6 @@
                 結合賣場推播精美商品卡，讓 AI 幫你聊出高轉換轉單！
             </p>
             
-            <!-- 課程資訊小卡 -->
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10">
                 <div class="glass-card px-6 py-3 rounded-lg flex items-center">
                     <i class="fa-regular fa-calendar text-brand-500 text-xl mr-3"></i>
@@ -113,21 +182,20 @@
                 </div>
             </div>
 
-            <a href="#pricing" class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-full text-white bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 transform hover:scale-105 transition-all shadow-xl shadow-brand-500/25">
+            <a href="#register" class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-full text-white bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 transform hover:scale-105 transition-all shadow-xl shadow-brand-500/25">
                 查看今日限定優惠 <i class="fa-solid fa-arrow-right ml-2"></i>
             </a>
             <p class="mt-4 text-sm text-accent-500 font-medium">⚠️ 僅限今日：預付訂金 $1,000 再折 $100</p>
         </div>
     </header>
 
-    <!-- STREAMING_CHUNK:Designing the Pain Points section -->
+    <!-- ════ PAIN POINTS ════ -->
     <section id="pain-points" class="py-20 bg-slate-800/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">你是不是也面臨這些<span class="text-red-400">困境</span>？</h2>
                 <p class="text-slate-400 text-lg max-w-2xl mx-auto">在這個流量越來越貴的時代，「回覆速度」就是你的「成交勝率」！</p>
             </div>
-            
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-red-500/50 transition">
                     <div class="w-14 h-14 bg-red-500/20 rounded-xl flex items-center justify-center mb-6">
@@ -154,20 +222,16 @@
         </div>
     </section>
 
-    <!-- STREAMING_CHUNK:Structuring the 4-Step Syllabus Section -->
+    <!-- ════ SYLLABUS ════ -->
     <section id="syllabus" class="py-20 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">全渠道機器人自動收單<span class="text-brand-400">進階班</span></h2>
                 <p class="text-slate-400 text-lg max-w-2xl mx-auto">這不是一堂只教你怎麼設定的基礎課，而是帶你完成一套真正能「落地變現」的 AI 數位流程建置。</p>
             </div>
-
             <div class="relative">
-                <!-- 連接線 (Desktop) -->
                 <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-brand-900 via-brand-500 to-purple-900 transform -translate-y-1/2 z-0"></div>
-                
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
-                    <!-- Step 1 -->
                     <div class="glass-card p-6 rounded-2xl relative mt-8 md:mt-0">
                         <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-slate-900 border-2 border-brand-500 rounded-full flex items-center justify-center text-xl font-bold text-brand-400">1</div>
                         <div class="text-center mt-6">
@@ -176,8 +240,6 @@
                             <p class="text-sm text-slate-400">不用寫程式！帶你無痛完成系統註冊，建立專屬的自動化後台，把複雜的設定變成簡單 SOP。</p>
                         </div>
                     </div>
-                    
-                    <!-- Step 2 -->
                     <div class="glass-card p-6 rounded-2xl relative mt-8 md:mt-0">
                         <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-slate-900 border-2 border-brand-500 rounded-full flex items-center justify-center text-xl font-bold text-brand-400">2</div>
                         <div class="text-center mt-6">
@@ -186,8 +248,6 @@
                             <p class="text-sm text-slate-400">不管客人從哪裡來通通接得住！將 IG、FB、LINE@ 三大社群一鍵串接，打造全方位私域流量池。</p>
                         </div>
                     </div>
-
-                    <!-- Step 3 -->
                     <div class="glass-card p-6 rounded-2xl relative mt-8 md:mt-0">
                         <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-slate-900 border-2 border-brand-500 rounded-full flex items-center justify-center text-xl font-bold text-brand-400">3</div>
                         <div class="text-center mt-6">
@@ -196,8 +256,6 @@
                             <p class="text-sm text-slate-400">串接現有賣場，當客人觸發關鍵字，系統立刻送上精美的「圖文商品卡」，視覺化刺激購買慾。</p>
                         </div>
                     </div>
-
-                    <!-- Step 4 -->
                     <div class="glass-card p-6 rounded-2xl relative mt-8 md:mt-0">
                         <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-slate-900 border-2 border-brand-500 rounded-full flex items-center justify-center text-xl font-bold text-brand-400">4</div>
                         <div class="text-center mt-6">
@@ -211,7 +269,7 @@
         </div>
     </section>
 
-    <!-- STREAMING_CHUNK:Target Audience Section -->
+    <!-- ════ TARGET ════ -->
     <section id="target" class="py-20 bg-slate-800/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row items-center gap-12">
@@ -220,10 +278,7 @@
                 </div>
                 <div class="lg:w-1/2">
                     <h2 class="text-3xl md:text-4xl font-bold mb-6">這堂課專為<span class="text-brand-400">想放大業績的你</span>設計</h2>
-                    <p class="text-slate-300 text-lg mb-8 leading-relaxed">
-                        停止無效的瞎忙，讓自動化流程為你的業績打工！把你的社群帳號變成最強的自動化銷售業務員。
-                    </p>
-                    
+                    <p class="text-slate-300 text-lg mb-8 leading-relaxed">停止無效的瞎忙，讓自動化流程為你的業績打工！把你的社群帳號變成最強的自動化銷售業務員。</p>
                     <ul class="space-y-4">
                         <li class="flex items-start">
                             <i class="fa-solid fa-circle-check text-green-400 text-xl mr-4 mt-1"></i>
@@ -252,17 +307,14 @@
         </div>
     </section>
 
-    <!-- STREAMING_CHUNK:Pricing and Urgency Call to Action -->
+    <!-- ════ PRICING ════ -->
     <section id="pricing" class="py-24 relative overflow-hidden">
-        <!-- 背景裝飾 -->
         <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-brand-900/40 to-transparent"></div>
-        
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="glass-card rounded-3xl p-8 md:p-12 border-2 border-brand-500/50 shadow-2xl shadow-brand-500/20 text-center">
                 <div class="inline-block bg-accent-500 text-slate-900 font-bold px-4 py-1 rounded-full text-sm mb-6 animate-bounce">
                     <i class="fa-solid fa-bolt mr-1"></i> 限時優惠活動
                 </div>
-                
                 <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">進階班專屬方案</h2>
                 <p class="text-slate-300 text-lg mb-8">投資一個幫你 24 小時賺錢的業務員，只要吃一頓大餐的價格。</p>
                 
@@ -280,7 +332,6 @@
                     </div>
                 </div>
 
-                <!-- 限定今日優惠區塊 -->
                 <div class="bg-slate-800/80 border border-accent-500/50 rounded-xl p-6 mb-10 text-left max-w-xl mx-auto">
                     <h4 class="text-accent-500 font-bold text-xl mb-2"><i class="fa-solid fa-gift mr-2"></i>僅限今日！專屬早鳥行動禮</h4>
                     <p class="text-slate-300 mb-4">現在立即預付訂金 <strong class="text-white">NT$ 1,000</strong> 搶佔名額，尾款總價直接 <strong class="text-green-400">再折抵 NT$ 100</strong>！</p>
@@ -291,9 +342,9 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button class="bg-gradient-to-r from-accent-500 to-orange-500 hover:from-accent-400 hover:to-orange-400 text-white text-lg font-bold py-4 px-10 rounded-full shadow-lg shadow-accent-500/30 transform hover:scale-105 transition-all">
-                        立即付訂 $1000 享折扣
-                    </button>
+                    <a href="#register" class="inline-flex items-center justify-center bg-gradient-to-r from-accent-500 to-orange-500 hover:from-accent-400 hover:to-orange-400 text-white text-lg font-bold py-4 px-10 rounded-full shadow-lg shadow-accent-500/30 transform hover:scale-105 transition-all">
+                        立即填寫報名表 <i class="fa-solid fa-arrow-down ml-2"></i>
+                    </a>
                     <button class="bg-slate-700 hover:bg-slate-600 text-white text-lg font-bold py-4 px-10 rounded-full transition-all">
                         聯絡客服詢問
                     </button>
@@ -303,14 +354,155 @@
         </div>
     </section>
 
-    <!-- STREAMING_CHUNK:Final Footer section -->
+    <!-- ════ REGISTER FORM ════ -->
+    <section id="register" class="py-24 relative overflow-hidden">
+        <!-- 背景光暈 -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-purple-700 rounded-full blur-[160px] opacity-20 pointer-events-none"></div>
+
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 relative z-10">
+            <!-- 標題 -->
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-sm font-semibold mb-4">
+                    <i class="fa-solid fa-pen-to-square"></i> 學員報名表
+                </div>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-3">
+                    搶佔你的 <span class="gradient-text">專屬名額</span>
+                </h2>
+                <p class="text-slate-400 text-lg">填妥以下資料後，我們將在 24 小時內與您確認報名狀態。</p>
+            </div>
+
+            <!-- 表單卡片 -->
+            <div class="glass-card rounded-3xl p-8 md:p-10 border border-white/10 shadow-2xl">
+                
+                <!-- 成功訊息 -->
+                <div id="successMsg">
+                    <div class="check-circle">
+                        <i class="fa-solid fa-check text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">報名成功！🎉</h3>
+                    <p class="text-slate-300 text-lg mb-1">感謝您的報名，資料已成功送出！</p>
+                    <p class="text-slate-400">我們將在 24 小時內透過您填寫的聯絡方式與您確認。</p>
+                    <div class="mt-6 bg-slate-800/60 rounded-xl p-4 text-sm text-slate-400 border border-slate-700">
+                        <i class="fa-solid fa-circle-info text-brand-400 mr-2"></i>
+                        如需修改資料，請重新整理頁面後再次填寫，或直接聯繫客服。
+                    </div>
+                </div>
+
+                <!-- 報名表 -->
+                <form id="registerForm" novalidate>
+                    <div class="space-y-6">
+
+                        <!-- 姓名 -->
+                        <div class="field-group" id="field-name">
+                            <label class="form-label" for="name">
+                                姓名 <span class="required-star">*</span>
+                            </label>
+                            <input type="text" id="name" name="name" class="form-input"
+                                placeholder="請輸入您的姓名" autocomplete="name">
+                            <p class="field-error">請填寫您的姓名</p>
+                        </div>
+
+                        <!-- 電話 -->
+                        <div class="field-group" id="field-phone">
+                            <label class="form-label" for="phone">
+                                聯絡電話 <span class="required-star">*</span>
+                            </label>
+                            <input type="tel" id="phone" name="phone" class="form-input"
+                                placeholder="例：0912-345-678" autocomplete="tel">
+                            <p class="field-error">請填寫有效的聯絡電話</p>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="field-group" id="field-email">
+                            <label class="form-label" for="email">
+                                電子信箱 <span class="required-star">*</span>
+                            </label>
+                            <input type="email" id="email" name="email" class="form-input"
+                                placeholder="example@gmail.com" autocomplete="email">
+                            <p class="field-error">請填寫有效的電子信箱</p>
+                        </div>
+
+                        <!-- LINE ID -->
+                        <div class="field-group" id="field-line">
+                            <label class="form-label" for="lineId">
+                                LINE ID <span class="text-slate-500 font-normal">(選填)</span>
+                            </label>
+                            <input type="text" id="lineId" name="lineId" class="form-input"
+                                placeholder="方便我們透過 LINE 與您聯絡">
+                        </div>
+
+                        <!-- 身份 -->
+                        <div class="field-group" id="field-role">
+                            <label class="form-label" for="role">
+                                您的身份 <span class="required-star">*</span>
+                            </label>
+                            <select id="role" name="role" class="form-input">
+                                <option value="" disabled selected>請選擇您最符合的身份</option>
+                                <option value="品牌電商賣家">品牌電商賣家</option>
+                                <option value="一人創業老闆">一人創業老闆</option>
+                                <option value="社群行銷操盤手">社群行銷操盤手</option>
+                                <option value="上班族 / 斜槓工作者">上班族 / 斜槓工作者</option>
+                                <option value="學生">學生</option>
+                                <option value="其他">其他</option>
+                            </select>
+                            <p class="field-error">請選擇您的身份</p>
+                        </div>
+
+                        <!-- 付款方式 -->
+                        <div class="field-group" id="field-payment">
+                            <label class="form-label" for="payment">
+                                預計付款方式 <span class="required-star">*</span>
+                            </label>
+                            <select id="payment" name="payment" class="form-input">
+                                <option value="" disabled selected>請選擇付款方式</option>
+                                <option value="預付訂金 $1,000（享折扣）">預付訂金 $1,000（享折扣）</option>
+                                <option value="全額付清 $1,980">全額付清 $1,980</option>
+                            </select>
+                            <p class="field-error">請選擇付款方式</p>
+                        </div>
+
+                        <!-- 備註 -->
+                        <div class="field-group" id="field-note">
+                            <label class="form-label" for="note">
+                                備註 / 想問的問題 <span class="text-slate-500 font-normal">(選填)</span>
+                            </label>
+                            <textarea id="note" name="note" class="form-input" rows="3"
+                                placeholder="有任何疑問或備註，歡迎填寫在這裡"></textarea>
+                        </div>
+
+                        <!-- 訂金優惠提示 -->
+                        <div class="bg-accent-500/10 border border-accent-500/30 rounded-xl p-4 flex gap-3">
+                            <i class="fa-solid fa-triangle-exclamation text-accent-500 text-lg mt-0.5 flex-shrink-0"></i>
+                            <p class="text-sm text-slate-300">
+                                <strong class="text-accent-500">今日限定優惠：</strong>填表後完成預付訂金 NT$1,000，尾款可再折抵 NT$100，實際僅需 <strong class="text-white">NT$1,880</strong>！
+                            </p>
+                        </div>
+
+                        <!-- 送出按鈕 -->
+                        <button type="submit" id="submitBtn">
+                            <span id="btnText"><i class="fa-solid fa-paper-plane mr-2"></i>確認送出報名資料</span>
+                            <span id="btnLoading" class="hidden">
+                                <i class="fa-solid fa-circle-notch fa-spin mr-2"></i>資料送出中，請稍候…
+                            </span>
+                        </button>
+
+                        <p class="text-center text-xs text-slate-500 mt-2">
+                            <i class="fa-solid fa-lock mr-1"></i>
+                            您的個人資料僅用於課程聯繫，不會作其他用途。
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════ FOOTER ════ -->
     <footer class="bg-slate-950 py-10 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
             <div class="flex items-center mb-4 md:mb-0">
                 <i class="fa-solid fa-robot text-brand-500 text-2xl mr-2"></i>
                 <span class="text-xl font-bold text-white">Auto<span class="text-brand-500">Sales</span> 機器人學院</span>
             </div>
-            
             <div class="text-slate-500 text-sm text-center md:text-right">
                 <p>上課地點：辰巳咖啡 (提供飲品)</p>
                 <p class="mt-2">&copy; 2024 自動收單進階班. All rights reserved.</p>
@@ -318,6 +510,100 @@
         </div>
     </footer>
 
+    <!-- ════ FORM SCRIPT ════ -->
+    <script>
+        // ── 請將下方網址替換為你的 Google Apps Script 部署 URL ──
+        // 部署步驟請見頁面下方說明
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzTjml5NjUDj9PFxHEAyvM4NPgdOd-OEHdrYsAK9qCz6_eZLjob8VRuegL0-rIPSMJMXA/exec';
+
+        const form = document.getElementById('registerForm');
+        const successMsg = document.getElementById('successMsg');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnLoading = document.getElementById('btnLoading');
+
+        // 欄位驗證規則
+        const validators = {
+            name:    v => v.trim().length >= 2,
+            phone:   v => /^[\d\s\-\+\(\)]{7,15}$/.test(v.trim()),
+            email:   v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
+            role:    v => v !== '',
+            payment: v => v !== '',
+        };
+
+        function setError(fieldId, hasError) {
+            const el = document.getElementById('field-' + fieldId);
+            if (!el) return;
+            if (hasError) {
+                el.classList.add('has-error');
+            } else {
+                el.classList.remove('has-error');
+            }
+        }
+
+        function validateAll() {
+            let valid = true;
+            for (const [field, fn] of Object.entries(validators)) {
+                const el = document.getElementById(field);
+                if (!el) continue;
+                const ok = fn(el.value);
+                setError(field, !ok);
+                if (!ok) valid = false;
+            }
+            return valid;
+        }
+
+        // 即時驗證
+        ['name','phone','email','role','payment'].forEach(id => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.addEventListener('blur', () => {
+                const ok = validators[id] ? validators[id](el.value) : true;
+                setError(id, !ok);
+            });
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!validateAll()) return;
+
+            // 切換為 loading 狀態
+            submitBtn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoading.classList.remove('hidden');
+
+            const payload = {
+                timestamp:  new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }),
+                name:       document.getElementById('name').value.trim(),
+                phone:      document.getElementById('phone').value.trim(),
+                email:      document.getElementById('email').value.trim(),
+                lineId:     document.getElementById('lineId').value.trim(),
+                role:       document.getElementById('role').value,
+                payment:    document.getElementById('payment').value,
+                note:       document.getElementById('note').value.trim(),
+            };
+
+            try {
+                await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',   // Apps Script 不回傳 CORS header，用 no-cors
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+
+                // no-cors 不回傳內容，假設成功顯示完成畫面
+                form.style.display = 'none';
+                successMsg.style.display = 'block';
+
+            } catch (err) {
+                console.error(err);
+                alert('⚠️ 送出失敗，請確認網路連線後再試，或直接聯繫客服。');
+                submitBtn.disabled = false;
+                btnText.classList.remove('hidden');
+                btnLoading.classList.add('hidden');
+            }
+        });
+    </script>
+
 </body>
 </html>
-```eof
